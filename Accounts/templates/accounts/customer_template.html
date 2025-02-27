@@ -1,0 +1,32 @@
+{% extends 'accounts/main.html' %}
+
+{% load static %}
+
+
+
+{% block title%}
+<title>Customer CRUD</title>
+{% endblock%}
+
+
+{% include 'accounts/navbar.html' %}
+{% block content%}
+
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card" style="width:40%;">
+        <div class="card-body">
+            <h5 class="card-title text-center mb-4">Customer Form</h5>
+            <form action="{% url 'Create-customer' %}" method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+                
+                <div class="d-grid">
+                    <button type="submit" value="submit" class="btn btn-primary" name="submit">Subimt</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock%}

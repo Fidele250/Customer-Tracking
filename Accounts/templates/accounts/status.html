@@ -1,0 +1,32 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/main.ss' %}">
+<div class="row">
+    <div class="col">
+        <div class="card text-center text-dark-green mb-3" id=" total-order">
+            <div class="card-header"><h5 class="card-title">Total Orders</h5>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">{{total_orders}}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card text-center text-dark-green mb-3" id=" total-pending">
+            <div class="card-header"><h5 class="card-title">Total Pending</h5>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">{{pending}}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card text-center text-dark-green mb-3" id=" total-delivery">
+            <div class="card-header"><h5 class="card-title">Total Delivery</h5>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">{{delivered}}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
