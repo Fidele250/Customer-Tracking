@@ -17,6 +17,7 @@
                     <th>Product</th>
                     <th>Category</th>
                     <th>Price</th>
+                    <th></th>
                 </tr>
                 {% for prod in product%}
                 <tr>
@@ -24,6 +25,8 @@
                     <td>{{prod.name}}</td>
                     <td>{{prod.category}}</td>
                     <td>${{prod.price}}</td>
+                    <td><a href=""><button type="submit" class="btn btn-primary">Update</button></a></td>
+                    <td><a href=""><button type="submit" class="btn btn-danger">Delete</button></a></td>
                     
                     
                 </tr>

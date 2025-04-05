@@ -1,15 +1,29 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+from Customer import settings
 
 # Create your models here.
 
+
+class CustomUser(AbstractUser):
+     role_choice = (
+          ('Admin','Admin'),
+          ('Customer','Customer'),
+     )
+     role =models.CharField(max_length=15,choices=role_choice,default='Customer')
+     def __str__(self):
+          return self.first_name
+          
+
 class Customer(models.Model):
-    name = models.CharField(max_length = 255,null=True)
+    name = models.ForeignKey(CustomUser,max_length = 255,null=False,on_delete=models.CASCADE)
     phone = models.CharField(max_length = 255,null=True)
     email = models.EmailField(null=True)
     date = models.DateField(auto_created=True,null=True)
 
     def __str__(self):
-        return self.name
+        return self.name.username
     
 class Tag(models.Model):
     TAG =(('Sport','Sport'),
@@ -45,9 +59,43 @@ class Order(models.Model):
         ('Out for delivery','Out for delivery'),
         ('Delivered','Delivered')
     )
-    customer =models.ForeignKey(Customer,null = True, on_delete = models.SET_NULL,related_name='orders')
-    product = models.ForeignKey(Product,null =True,on_delete=models.SET_NULL)
+    customer =models.ForeignKey(Customer,null = True, on_delete = models.CASCADE,related_name='orders')
+    product = models.ForeignKey(Product,null =True,on_delete=models.SET_NULL,related_name='products')
     date = models.DateField(auto_created=True)
     status = models.CharField(max_length=255,choices =STATUS)
     def __str__(self):
             return f'{self.product.name} ordered by {self.customer.name}'
+    
+
+
+
+# class UserManager(BaseUserManager):
+#      def createUser(self,username,email,password=None,**extra_fields):
+#           if not email:
+#                raise ValueError('Email shoul be provided')
+#           email = self.normalize_email(email)
+#           user = self.model(username=username,email = email,**extra_fields) 
+#           user.set_password(password)
+#           user.save(using =self.db)
+#           return user
+#      def CreateSuperUser(self,username,email,password = None,**extra_field):
+#           extra_field.setdefault('is_staff',True)
+#           extra_field.setdefault('is_superuser',True)
+#           return createUser(self,username,email,password,**extra_fields)
+     
+
+# class CustomUser(AbstractUser):
+ 
+#      email = models.EmailField(unique=True)
+#      phone = models.CharField(max_length=15,unique=True)
+
+#      objects = UserManager()
+
+#      class Meta:
+#           verbose_name_plural = 'Users'
+#           verbose_name = 'User'
+#      def __str__(self):
+#           return self.username
+
+
+
