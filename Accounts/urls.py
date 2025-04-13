@@ -17,5 +17,8 @@ urlpatterns = [
     path ('login/',views.login_view,name = 'login'),
     path ('logout/',views.log_out,name = 'logout'),
     path('register/',views.register,name = 'register'),
+    path('message/',views.send_message,name = 'message'),
+    path('message/<str:pk>/',views.personal_message,name = 'pmessage'),
+
 
 ]

@@ -6,7 +6,7 @@ from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from Accounts.models import *
-from Accounts.forms import orderForm,customerForm,CreateUserForm,ProductForm
+from Accounts.forms import orderForm,customerForm,CreateUserForm,ProductForm,CreateMessage
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -140,7 +140,7 @@ def login_view (request):
             if user is not None:
                 login(request, user)
                 if user.role =='Admin':
-                    return redirect('home')
+                    return redirect('landing')
                 elif user.role =='Customer' :
                     return redirect('/')
             
@@ -195,9 +195,58 @@ def productCreate(request):
     
     return render(request,'accounts/productCreate.html',{'form':form})
 
+
+@login_required(login_url='login')
+def send_message(request):
+    if request.method == 'POST':
+        form = CreateMessage(request.POST)
+        if form.is_valid():
+            message_obj = form.save(commit=False)
+            message_obj.user = request.user
+            message_obj.save()
+            return redirect('pmessage')  
+    else:
+        form = CreateMessage(initial={'user': request.user})
+
+            
+
+    return render (request,'accounts/message.html',{
+        'form': form,
+        'user_email': request.user.email  
+    })
+
+
+@login_required(login_url='login')
+def personal_message(request,pk):
+    pmessage = Message.objects.get(id = pk)
+    
+    user = request.user
+    context = {
+        'pmessage':pmessage,
+        'user':user
+    }
+    
+    if pmessage.user != user and not user.is_staff:
+       
+        
+        return HttpResponse('You have created no message')
+    else:
+        return render(request,'accounts/personal_message.html',context)
+       
+    
+    
+
+
+
+def userProfile(request):
+    user = CustomUser.objects.all()
+    
+
 @api_view(['GET'])
 def customerlist (request):
     customer = Customer.objects.all()
+    for cust in customer:
+        print(cust.name)
 
     serializer = CustomerSerializer(customer, many = True)
     return Response (serializer.data)

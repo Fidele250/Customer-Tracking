@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'Accounts',
     'rest_framework',
     'django_filters',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -80,7 +81,7 @@ WSGI_APPLICATION = 'Customer.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'workshop',
+        'NAME': 'Customerz',
         'HOST':'127.0.0.1',
         'USER':'root',
         'PASSWORD':'123@fidele',

@@ -11,9 +11,10 @@ class CustomUser(AbstractUser):
           ('Admin','Admin'),
           ('Customer','Customer'),
      )
+     image = models.ImageField(error_messages='No Image',null=True)
      role =models.CharField(max_length=15,choices=role_choice,default='Customer')
      def __str__(self):
-          return self.first_name
+          return self.email
           
 
 class Customer(models.Model):
@@ -67,35 +68,12 @@ class Order(models.Model):
             return f'{self.product.name} ordered by {self.customer.name}'
     
 
-
-
-# class UserManager(BaseUserManager):
-#      def createUser(self,username,email,password=None,**extra_fields):
-#           if not email:
-#                raise ValueError('Email shoul be provided')
-#           email = self.normalize_email(email)
-#           user = self.model(username=username,email = email,**extra_fields) 
-#           user.set_password(password)
-#           user.save(using =self.db)
-#           return user
-#      def CreateSuperUser(self,username,email,password = None,**extra_field):
-#           extra_field.setdefault('is_staff',True)
-#           extra_field.setdefault('is_superuser',True)
-#           return createUser(self,username,email,password,**extra_fields)
-     
-
-# class CustomUser(AbstractUser):
- 
-#      email = models.EmailField(unique=True)
-#      phone = models.CharField(max_length=15,unique=True)
-
-#      objects = UserManager()
-
-#      class Meta:
-#           verbose_name_plural = 'Users'
-#           verbose_name = 'User'
-#      def __str__(self):
-#           return self.username
+class Message (models.Model):
+     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete= models.CASCADE,default=False,null=False)
+     message = models.TextField()
+     class Meta:
+          def __str__(self):
+               return f'message from {self.user}'
 
 
 
