@@ -19,6 +19,8 @@ urlpatterns = [
     path('register/',views.register,name = 'register'),
     path('message/',views.send_message,name = 'message'),
     path('message/<str:pk>/',views.personal_message,name = 'pmessage'),
+    path('user/<str:pk>/',views.user_Profile,name='profile'),
+    path('about/',views.About,name ='about')
 
 
 ]

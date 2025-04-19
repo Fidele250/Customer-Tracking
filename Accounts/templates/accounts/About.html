@@ -1,0 +1,173 @@
+{% extends 'accounts/landing.html' %}
+{% load static%}
+
+{% block content %}
+<style>
+    .about-us-section {
+        margin-top: 100px;
+    }
+    .about-us-card:hover{
+        transition: 300ms ease-in-out;
+        scale:1.05;
+    }
+
+    .about-us-card {
+        background-color: #2e3267;
+        color: wheat;
+        margin: 2rem auto;
+
+
+    }
+
+    .about-us-left {
+        background-color: #2e3267;
+        min-width: 40%;
+    }
+
+    .about-us-right {
+        min-width: 60%;
+    }
+
+    .about-icons {
+        font-size: 1.5rem;
+    }
+    .about-us-section h1{
+        text-align: center;
+        margin: 4rem auto;
+    }
+    .team{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        gap:3rem;
+        
+        
+    }
+     .team img{
+         max-width: 300px;
+         margin: 1rem auto;
+         padding: 1rem 0 1rem 2rem;
+         filter: saturate(0);
+         border-radius: 10%;
+         
+    }
+    .team .social a li{
+        text-decoration: none;
+        color:#2e3267;
+    }
+    h3{
+        text-align: center;
+        margin: 1rem auto;
+    }
+    .member{
+        max-width: 333px;
+        box-shadow: 5px 5px 5px 5px rgba(199, 197, 197, 0.724);
+        border-radius: 20px;
+        
+
+    }
+    .team img:hover{
+        filter: saturate(1);
+    }
+    .member:hover{
+        transition: 300ms ease-in;
+        scale: 1.02;
+    }
+    @media screen and (max-width:678px) {
+        .team{
+            grid-template-columns: 1fr;
+        }
+        .member{
+            margin-left: -1rem;
+        
+    }
+    .about-us-card{
+        margin: 2rem -1rem;
+    }
+    .about-us-card h5{
+        font-size: medium;
+    }
+    }
+
+
+</style>
+
+
+<section class="about-us-section pt-5  mx-5">
+    <div class="about-us-card d-flex rounded overflow-hidden shadow-sm">
+        <div class="about-us-left p-4 text-white d-flex flex-column justify-content-between">
+            <div>
+                <h2 class="fw-bold">Who we are</h2>
+            </div>
+            <div class="desc">
+                IT Company launched in 2024, aimed at solving onboarding tech challenges.
+                We provide
+                affordable tech-based services & products
+            </div>
+        </div>
+        <div class="about-us-right p-4 bg-white text-dark">
+            <h5><b>Our Vision</b></h5>
+            <p>ITsol is a forward-thinking tech company established in 2024. We aim to solve onboarding technological
+                issues by offering cutting-edge solutions and expert services tailored for modern needs.</p>
+
+            <h5><b>Our Mission</b></h5>
+            <p>We strive to make technology accessible and meaningful. From digital training and e-services to secure
+                solutions — we’re here to innovate and empower.</p>
+        </div>
+    </div>
+    <div class="about-us-card d-flex rounded overflow-hidden">
+        <div class="about-us-left p-4 text-white d-flex flex-column justify-content-between">
+            <div>
+                <h2 class="fw-bold">What we do </h2>
+            </div>
+        </div>
+        <div class="about-us-right p-4 bg-white text-dark">
+            <h5><b>We provide :</b></h5>
+            <ul>
+                <li>Custom software and web development</li>
+                <li>Online tech courses and mentoring</li>
+                <li>Digital transformation consultancy</li>
+                <li>Cybersecurity awareness and protection services</li>
+                <li>Irembo services</li>
+                <li>VISA Application</li>
+            </ul>
+        </div>
+    </div>
+    <div class="about-us-card d-flex rounded overflow-hidden">
+        <div class="about-us-left p-4 text-white d-flex flex-column justify-content-between">
+            <div>
+                <h2 class="fw-bold">Why to choose ITsol?</h2>
+            </div>
+        </div>
+        <div class="about-us-right p-4 bg-white text-dark">
+            <h5><b>Because</b></h5>
+            <p>We value quality, transparency, and customer success. With cutting-edge technology and a client-first approach, we
+            deliver beyond expectations.
+            </p>
+
+
+        </div>
+    </div>
+
+    <h1> <b> Meet our team </b></h1>
+
+    <div class="team">
+        <div class="member">
+            <img src="{% static 'images/CEO.jpg' %}" alt="">
+            <h3>CEO and Founder</h3>
+            <div class="social">
+                <ul>
+                    <a href=""><li><i class="bi-twitter"></i></li></a>
+                    <a href=""><li><i class="bi-linkedin"></i></li></a>
+                </ul>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+    
+</section>
+
+
+
+{% endblock%}

@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'Customer.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Customerz',
+        'NAME': 'ITsol',
         'HOST':'127.0.0.1',
         'USER':'root',
         'PASSWORD':'123@fidele',

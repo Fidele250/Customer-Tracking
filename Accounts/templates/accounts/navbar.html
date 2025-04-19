@@ -24,7 +24,7 @@
         
     </div>
        
-    <span><i class="bi bi-person"></i>{{user.username}}</span>
+    <a href="{% url 'profile' user.id %}"><span><i class="bi bi-person"></i>{{user.username}}</span></a>
     <span><a href=" {% url 'logout' %}">Logout</a></span>
 
     {% else %}

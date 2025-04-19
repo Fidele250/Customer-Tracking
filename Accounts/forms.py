@@ -26,7 +26,7 @@ class ProductForm(ModelForm):
 class CreateUserForm(UserCreationForm):
     class Meta:
          model =  CustomUser
-         fields = ['username','email','role','password1','password2',]
+         fields = ['username','email','role','password1','password2','image']
 
 class CreateMessage(ModelForm):
     class Meta:

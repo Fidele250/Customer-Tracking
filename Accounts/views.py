@@ -1,3 +1,5 @@
+from datetime import datetime
+from MySQLdb import Date
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse
 from django.forms import formset_factory
@@ -13,6 +15,7 @@ from rest_framework.response import Response
 from Accounts.serializers import CustomerSerializer
 from Accounts.filters import OrderFilter
 from Accounts.decorators import allowed_user,admin_customer
+import qrcode
 
 # Create your views here.
 
@@ -129,8 +132,8 @@ def customer_delete(request,pk):
     
     
 def login_view (request):
-    if request.user.is_authenticated:# If user already loged in
-         return redirect('/')
+    if request.user.is_authenticated:
+        return redirect('/')
     else:
         if request.method == 'POST':
             username= request.POST.get('username')
@@ -163,22 +166,26 @@ def register (request):
         return redirect('/')
     else:
         form = CreateUserForm()
-    if request.method=='POST':
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            user =form.save()
-            group = Group.objects.get(name = 'customer')
-            user.groups.add(group)
-            
-            messages.success(request,  ' Created successfully' )
-        return redirect('login')
+        if request.method=='POST':
+            form = CreateUserForm(request.POST)
+            if form.is_valid():
+                user =form.save()
+                group = Group.objects.get(name = 'customer')
+                user.groups.add(group)
+                
+                messages.success(request,  ' Created successfully' )
+            return redirect('login')
     
     return render(request, 'accounts/registration.html', {'form':form})
     
 
 ### LANDING PAGE ###
 def landing(request):
-    return render(request, 'accounts/landing.html')
+    copyright = datetime.now().year
+    print(copyright)
+    
+
+    return render(request, 'accounts/landing.html',{'copyright':copyright})
 
 ## PRODUCT VIEWS ##
 @login_required(login_url='login')
@@ -219,16 +226,17 @@ def send_message(request):
 @login_required(login_url='login')
 def personal_message(request,pk):
     pmessage = Message.objects.get(id = pk)
+    Allmessage = request.user.message_set.all()
     
     user = request.user
     context = {
         'pmessage':pmessage,
-        'user':user
+        'user':user,
+        'all':Allmessage
     }
     
     if pmessage.user != user and not user.is_staff:
        
-        
         return HttpResponse('You have created no message')
     else:
         return render(request,'accounts/personal_message.html',context)
@@ -236,11 +244,28 @@ def personal_message(request,pk):
     
     
 
+def user_Profile(request,pk):
+    user =request.user
+    message_number =user.message_set.count()
+    pmessage = Message.objects.get(id = pk)
 
 
-def userProfile(request):
-    user = CustomUser.objects.all()
+
+
+    if user != request.user and not user.is_staff:
+        return HttpResponse('No profile found')
+        
+    else:
+        context = {
+            'user':user,
+            'message_number':message_number,
+            'message':pmessage.message
+        }
+        return render (request,'accounts/user_profile.html',context)
     
+
+def About(request):
+    return render (request,'accounts/About.html')   
 
 @api_view(['GET'])
 def customerlist (request):

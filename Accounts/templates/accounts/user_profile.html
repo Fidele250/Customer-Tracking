@@ -1,0 +1,15 @@
+{% extends 'accounts/personal_message.html' %}
+{% load static %}
+
+
+{% block container %}
+<div class="container">
+    <div class="profile">
+        <img src="{{user.image}}" alt="">
+        <p>Username: <strong>{{user.username }}</strong></p>
+        <p>Email: <strong>{{ user.email }}</strong></p>
+        <p>Number of messages: {{message_number}}</p>
+    </div>
+
+</div>
+{% endblock %}
