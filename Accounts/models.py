@@ -18,7 +18,7 @@ class CustomUser(AbstractUser):
           
 
 class Customer(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
     phone = models.CharField(max_length = 255,null=True)
     email = models.EmailField(null=True)
     date = models.DateField(auto_created=True,null=True)
