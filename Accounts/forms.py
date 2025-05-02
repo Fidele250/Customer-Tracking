@@ -15,7 +15,7 @@ class orderForm(ModelForm):
 class customerForm(ModelForm):
     class Meta:
         model = Customer
-        fields = ['name','phone','email','date']
+        fields = ['name','phone','email']
 
 class ProductForm(ModelForm):
     class Meta:
@@ -26,7 +26,7 @@ class ProductForm(ModelForm):
 class CreateUserForm(UserCreationForm):
     class Meta:
          model =  CustomUser
-         fields = ['username','email','role','password1','password2','image']
+         fields = ['username','email','role','password1','password2']
 
 class CreateMessage(ModelForm):
     class Meta:

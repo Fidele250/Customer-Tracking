@@ -21,7 +21,7 @@ class Customer(models.Model):
     name = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
     phone = models.CharField(max_length = 255,null=True)
     email = models.EmailField(null=True)
-    date = models.DateField(auto_created=True,null=True)
+    date = models.DateField(auto_created=True,null=True,auto_now_add=True,editable=True)
 
     def __str__(self):
         return self.name.username

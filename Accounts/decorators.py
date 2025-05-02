@@ -21,7 +21,7 @@ def allowed_user(allowes_roles =[]):
             if group in allowes_roles:
                 return view_function(request,*args,**kwargs)
             else:
-                return HttpResponse('Need admin Permission 😊')
+                return HttpResponse("<h1 style ='text-align:'center'>Need admin Permission 😊</h1>")
         return wrapper_function 
     return decorator
 
