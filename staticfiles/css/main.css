@@ -1,0 +1,13 @@
+body {
+    background-color: rgb(222, 238, 252);
+}
+#total-pending{
+    background-color: #2d829a;
+}
+#total-delivery{
+    background-color: aqua;
+}
+
+.navbar-brand{
+    border-radius: 50%;
+}
